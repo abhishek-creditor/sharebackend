@@ -486,7 +486,6 @@ model contactus {
   id         String    @id @default(uuid())
   first_name String    @db.VarChar(50)
   last_name  String    @db.VarChar(50)
-  phone      String    @db.VarChar(20)
   email      String    @db.VarChar(100)
   message    String    @db.VarChar(300)
   created_at DateTime? @default(now()) @db.Timestamptz(6)
@@ -758,19 +757,19 @@ model engagement {
 }
 
 model event {
-  id           String       @id @default(cuid())
-  title        String
-  description  String?
-  startTime    DateTime
-  endTime      DateTime
-  location     String?
-  isRecurring  Boolean      @default(false)
-  calendarType CalendarType
-  visibility   Visibility   @default(PRIVATE)
+  id                     String                     @id @default(cuid())
+  title                  String
+  description            String?
+  startTime              DateTime
+  endTime                DateTime
+  location               String?
+  isRecurring            Boolean                    @default(false)
+  calendarType           CalendarType
+  visibility             Visibility                 @default(PRIVATE)
 
-  creatorId String
-  updatedBy String? @db.VarChar(150)
-  creator   users   @relation("EventCreator", fields: [creatorId], references: [id])
+  creatorId              String
+  updatedBy              String?                    @db.VarChar(150)
+  creator                users                      @relation("EventCreator", fields: [creatorId], references: [id])
 
   groupId                String?
   group                  groups?                    @relation(fields: [groupId], references: [id])

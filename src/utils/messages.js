@@ -70,6 +70,44 @@ module.exports = {
   COURSES_RETRIEVED_SUCCESSFULLY:"Enrolled courses retrieved successfully",
   CATALOG_UPDATED_SUCCESSFULLY:"Catalog updated successfully",
   CATALOG_DELETED_SUCCESSFULLY:"Catalog deleted successfully",
+  QUIZ_UPDATED: 'Quiz updated successfully',
+  QUESTION_ADDED: 'Question added to quiz successfully.',
+  QUESTION_UPDATED: 'Question and options updated successfully',
+  QUESTIONS_UPDATED_BULK: 'Questions updated successfully',
+  QUESTIONS_FETCHED: 'Questions fetched successfully',
+  ATTEMPTS_FETCHED: 'Quiz attempts fetched successfully',
+  OPTIONS_ADDED: 'Options added successfully',
+  OPTION_UPDATED: 'Option updated successfully',
+  OPTION_DELETED: 'Option deleted successfully',
+  ANALYTICS_FETCHED: 'Overall Quiz Performance fetched successfully',
+  USER_ANALYTICS_FETCHED: 'User quiz performance fetched successfully',
+  QUESTION_PERFORMANCE_FETCHED: 'User question-wise performance fetched successfully',
+  SUBMISSION_STATUS_FETCHED: 'Quiz submissions fetched successfully',
+  QUIZ_SCORES_FETCHED: 'Quiz scores fetched successfully',
+  QUIZ_ATTEMPT_STARTED: 'Quiz attempt started / resumed successfully',
+  QUIZ_SUBMITTED: 'Quiz submitted successfully',
+  QUIZ_ATTEMPT_STATUS_FETCHED: 'Quiz attempt status fetched successfully',
+  ATTEMPTED_QUIZZES_FETCHED: 'Attempted quizzes fetched successfully',
+  REMAINING_ATTEMPTS_FETCHED: 'Remaining attempts fetched successfully',
+  USER_QUIZZES_WITH_STATUS_FETCHED: 'All quizzes of particular user with status fetched successfully',
+  QUESTION_DELETED: 'Question deleted successfully',
+  QUESTIONS_ADDED: 'Questions added successfully',
+  QUIZ_AND_RELATED_DATA_DELETED: 'Quiz and all related data deleted successfully.',
+  QUIZ_CREATED: 'Quiz created successfully',
+  QUIZ_FETCHED: 'Quiz fetched successfully',
+  COURSES_ADDED_TO_CATALOG: 'Courses added to catalog successfully',
+  CATALOG_CREATED: 'Catalog created successfully',
+  EVENTS_FETCHED: 'Event(s) fetched successfully.',
+  EVENT_NOT_FOUND: 'Event not found.',
+   PARTICIPANTS_FETCHED: 'Participant(s) fetched successfully.',
+  PARTICIPANT_ADDED: 'Participant added successfully.',
+  PARTICIPANT_REMOVED: 'Participant removed successfully.',
+   REMINDERS_FETCHED: 'Reminder(s) fetched successfully.',
+  REMINDER_CREATED: 'Reminder created successfully.',
+  REMINDER_DELETED: 'Reminder deleted successfully.',
+ RECURRENCE_FETCHED: 'Recurrence rule fetched successfully.',
+ 
+
   DEBATE_CREATED_SUCCESSFULLY:"Debate created successfully",
   PARTICIPANT_CREATED:"Participant created successfully",
   DEBATE_FETCHED_SUCCESSFULLY:"Debate fetched successfully",
@@ -87,8 +125,20 @@ module.exports = {
   RESPONSE_DELETED_SUCCESSFULLY:"Response deleted successfully",
   ENGAGEMENT_SUCCESSFUL:"Engagemnt added successfully",
   RESPONSE_FETCHED_SUCCESSFULLY:"Response fetched successfully",
+  FETCH_ALL_MODULES_SUCCESS:"All modules fetched successfully",
+  MODULE_CREATED: "Module created in database successfully",
+  UPDATED_MODULE: "Module updated sucessfully",
+  MODULE_DELETED : "Module deleted succesfully",
+  MODULE_DATA:  "Module data sent sucessfully",
+  CATALOGS_FETCHED_SUCCESSFULLY: "Catalogs fetched successfully.",
+  COURSES_FETCHED_FROM_CATALOG: "Courses fetched from catalog successfully.",
+  COURSES_REMOVED_FROM_CATALOG: "Courses removed from catalog successfully.",
+  
 
 
+
+
+  
 
 
 
@@ -145,6 +195,13 @@ module.exports = {
   NO_PARTICIPANTS_FOUND:"No participants found",
   SUBSCRIPTION_ALREADY_EXISTS: "Subscription already exists",
   SUBSCRIPTION_ALREADY_PURCHASED: "Subscription already purchased",
+  ACCESS_DENIED_PURCHASE_THE_CATALOG:'Access denied. Please purchase or subscribe to access this catalog.',
+  CATALOG_NAME_REQUIRED: 'Catalog name is required.',
+  ALL_PASSWORD_FIELDS_REQUIRED: 'All fields (current, new, and confirm password) are required.',
+  PASSWORD_TOO_SHORT: 'Password must be at least 8 characters long.',
+  SAME_AS_OLD_PASSWORD: 'New password must be different from the current password.',
+  OAUTH_PASSWORD_CHANGE_NOT_ALLOWED: "OAuth users can't change passwords.",
+  INCORRECT_CURRENT_PASSWORD: 'Current password is incorrect.',
   FIELD_REQUIRED:"No valid fields provided for update",
   NEW_EMAIL_REQUIRED:"New email is required",
   NEW_EMAIL_IS_SAME_AS_CURRENT_EMAIL:"New email is same as current email",
@@ -167,6 +224,34 @@ module.exports = {
  REMOVE_COURSES_ERROR:'Can only remove courses from catalogs containing courses all in DRAFT or all in PUBLISHED status',
  DELETE_COURSES_ERROR:'Can only delete catalogs containing courses all in DRAFT or all in PUBLISHED status',
  CATALOG_NAME_ALREADY_EXISTS:'A catalog with this name already exists',
+ INTERNAL_SERVER_ERROR: 'Internal server error',
+ QUESTION_REQUIRED_FIELDS: 'Required fields: text, correctAnswer, question_type, and question_options array.',
+ FAILED_TO_ADD_QUESTION: 'Failed to add question to quiz.',
+ FAILED_TO_DELETE_QUIZ: 'Failed to delete quiz.',
+ MISSING_REQUIRED_FIELDS: 'Missing required fields: module_id, title, type',
+ INVALID_MIN_SCORE: 'Minimum score must be between 0 and 100',
+ MIN_ATTEMPTS_REQUIRED: 'Max attempts must be at least 3',
+ MIN_SCORE_GREATER_THAN_MAX: 'Minimum score cannot be greater than maximum score',
+  INVALID_TIME_ESTIMATE: 'Time estimate must be a positive number',
+  QUIZ_NOT_FOUND: 'Quiz not found',
+  MISSING_QUESTION_FIELDS: 'Required fields: text, correctAnswer, and question_options array.',
+  QUESTION_OPTIONS_REQUIRED: 'question_options array is required and cannot be empty.',
+  QUESTION_OPTION_TEXT_REQUIRED: 'All question_options must have non-empty text.',
+  FIELDS_MUST_BE_ARRAYS: 'All fields must be arrays.',
+  ARRAYS_MUST_BE_EQUAL_LENGTH: 'All arrays must be of equal length.',
+  MISSING_OR_INVALID_QUESTION_OPTIONS: 'Missing required fields or invalid question options',
+  NO_PENDING_ATTEMPT: 'No pending attempt found to submit',
+  MAX_ATTEMPTS_REACHED_OR_QUIZ_NOT_FOUND: 'Maximum attempts reached or quiz not found',
+  NO_QUESTION_RESPONSES_FOUND: 'No question responses found for this attempt',
+  ATTEMPT_NOT_FOUND: 'Attempt not found',
+  COURSE_IDS_REQUIRED: 'Course IDs are required',
+  CATALOG_ID_REQUIRED: 'Catalog ID is required',
+   
+
+
+
+
+RECURRENCE_NOT_FOUND: 'Recurrence rule not found.',
  DEBATE_ID_REQUIRED:"Debate id required",
  VALID_STATEMENT_CONTENT_REQUIRED:"Valid statement content is required",
  VALID_MARKS_REQUIRED:"Valid marks are required",
@@ -178,7 +263,14 @@ module.exports = {
  ENGAGEMENT_FAILED:"Result not found",
  DEBATE_NOT_FOUND:"Debate not found",
  NEED_RESPONSE_FOR_SUBMITTING:"You must submit at least one response before submitting the debate.",
+ COURSE_ID_REQUIRED: "Course ID is required",
+
+
+
+ ADMIN_INSTRUCTOR_CANNOT_ACCESS :"Admins and instructors cannot view individual users' events.",
  
+
+
   // Validation messages
   REQUIRED_FIELD: (field) => `${field} is required`,
   INVALID_FIELD: (field) => `${field} is invalid`,

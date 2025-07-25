@@ -1,5 +1,3 @@
-const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient();
 const {findQuestionById, getAllQuestions} = require('../../dao/chatbot/chatbot.js');
 const { sendMail, sendMailToMultiUsers} = require("../../utils/mail.js");
 const { successResponse, errorResponse } = require("../../utils/apiResponse.js");

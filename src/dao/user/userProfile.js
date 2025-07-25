@@ -91,7 +91,7 @@ const updateProfileImage = async (userId, imageUrl) => {
       select: {
         id: true,
         first_name: true,
-        ast_name: true,
+        last_name: true,
         image: true
       }
     });

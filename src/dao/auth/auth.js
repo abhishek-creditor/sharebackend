@@ -88,7 +88,16 @@ const findUserById = async (id) => {
         id: true,
         first_name: true,
         last_name: true,
-        email: true, 
+        email: true,
+        phone: true,
+        gender: true,
+        last_login: true,
+        created_at: true,
+        updated_at: true,
+        image: true,
+        dob: true,
+        bio: true,
+        location: true,
         timezone: true,
         user_roles: {
           select: {role: true}
