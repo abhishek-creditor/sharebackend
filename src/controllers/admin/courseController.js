@@ -64,7 +64,7 @@ module.exports.createCourseController = async (req, res) => {
         updatedBy: userId,
       };
   
-      const course = await courseDAO.createCourseController({userId, ...courseData}); 
+      const course = await courseDAO.createCourse({userId, ...courseData}); 
   
       return successResponse(req, res, course, 201, messages.COURSE_CREATED_SUCCESSFULLY);
     } catch (error) {
@@ -234,47 +234,18 @@ module.exports.addAdminController = async (req, res) => {
 };
 
 
-// module.exports.getUserCoursesController = async(req,res) => {
-//   try{
-//     const userId = req.user.id;
-
-//     if(!userId || typeof userId !== 'string') {
-//       return errorResponse(req, res, 400, messages.VALID_USER_ID_REQUIRED);
-//     }
-
-//     const checkUser = await courseDAO.userExist(userId)
-//     if(!checkUser) return errorResponse(req, res, 404, messages.USER_NOT_FOUND);
-
-//     const courses = await courseDAO.getUserCourses(userId)
-
-//     return successResponse(req, res, courses, 200, messages.COURSES_FETCHED_SUCCESSFULLY)
-//   }  
-//   catch(error){
-//     console.error('Error adding admin:', error);
-//     const message =
-//       process.env.NODE_ENV === 'development'
-//         ? error.message
-//         : messages.SERVER_ERROR;
-//     return errorResponse(req, res, 500, message);
-//   }
-// }
-
 
 module.exports.getUserCoursesController = async (req, res) => {
   try {
     const userId = req.user.id;
     const cacheKey = `user-courses:${userId}`;
 
-    // Log Redis connection status
     console.log('Redis status:', await redisClient.ping());
 
-    // Check Redis cache
     const redisData = await redisClient.get(cacheKey);
-    console.log(`Redis data for ${cacheKey}:`, redisData);
 
     if (redisData) {
       const courses = JSON.parse(redisData);
-      console.log('Parsed courses from Redis:', courses);
       if (Array.isArray(courses) && courses.length > 0) {
         console.log('Cache hit for user:', userId);
         return successResponse(req, res, courses, 200, messages.COURSES_FETCHED_SUCCESSFULLY);
@@ -289,12 +260,10 @@ module.exports.getUserCoursesController = async (req, res) => {
       return errorResponse(req, res, 400, messages.VALID_USER_ID_REQUIRED);
     }
 
-    // Use courseDAO for user existence and course fetching
     const checkUser = await courseDAO.userExist(userId);
     if (!checkUser) return errorResponse(req, res, 404, messages.USER_NOT_FOUND);
 
     const courses = await courseDAO.getUserCourses(userId);
-    console.log('Courses fetched from DB via courseDAO:', courses);
 
     if (courses.length > 0) {
       await redisClient.setEx(cacheKey, 3600, JSON.stringify(courses)); // 1-hour TTL
@@ -315,9 +284,20 @@ module.exports.getUserCoursesController = async (req, res) => {
 }
 
 
-module.exports.getAllCourses = async (req, res) => {
+module.exports.getAllCoursesController = async (req, res) => {
   try {
-    const courses = await courseDAO.getCourses();
+     const filters = req.query;
+
+     const validFilters = ['isHidden', 'course_status', 'course_level', 'courseType'];
+
+     for(const key in filters) {
+      if(!validFilters.includes(key)){
+        return errorResponse(req, res, 400, `Invalid filter: ${key}`);
+      }
+     }
+
+     const courses = await courseDAO.getAllCourses(filters)
+
     return successResponse(req, res, courses, 200, messages.COURSES_FETCHED_SUCCESSFULLY);
   } catch (error) {
     console.error('Error fetching courses:', error);
@@ -326,9 +306,9 @@ module.exports.getAllCourses = async (req, res) => {
 };
 
 
-module.exports.getCourseById = async (req, res) => {
+module.exports.getCourseByIdController = async (req, res) => {
   try {
-    const { id } = req.query;
+    const { id } = req.params;
     const course = await courseDAO.getCourseById(id);
 
     if (!course || course.deleted_at) {

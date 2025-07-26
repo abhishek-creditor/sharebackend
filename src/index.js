@@ -48,19 +48,20 @@ const io = socketIo(server, {
   }
 })
 
-app.use(express.json());
 
-
-app.use(cookieParser());
-
-app.use(cors({
+// this part was commented before that had to be changed for calendar functioning
+app.use(
+  cors({
     origin: "http://localhost:3000",
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
+app.use(express.json());
+app.use(cookieParser());
 
 app.use(
+
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
@@ -103,6 +104,12 @@ app.use(fileUpload());
 
 app.use("/api/scorm",scormRoutes);
 app.use('/uploads/scorm', express.static(path.join('C:/scorm_uploads')));
+
+// calendar routes
+app.use("/calendar/events", eventRoutes);
+app.use("/calendar/participants", participantRoutes);
+app.use("/calendar/reminders", reminderRoutes);
+
 
 (async function initialize() {
   try {

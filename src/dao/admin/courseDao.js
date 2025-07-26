@@ -1,7 +1,4 @@
-const { PrismaClient } = require('@prisma/client');
-const { $transaction, course_instructors } = require('../../config/prismaClient');
-const prisma = new PrismaClient();
-const message = require('../../utils/messages');
+const prisma = require('../../config/prismaClient')
 const messages = require('../../utils/messages');
 
 
@@ -225,6 +222,39 @@ const getUserCourses = async (userId) => {
     }
 };
 
+
+const getAllCourses = async (filters) => {
+  try {
+    const whereClause = {};
+    
+    if (filters.isHidden !== undefined) {
+      whereClause.isHidden = filters.isHidden === 'true';
+    }
+    if (filters.course_status) {
+      whereClause.course_status = filters.course_status;
+    }
+    if (filters.course_level) {
+      whereClause.course_level = filters.course_level;
+    }
+    if (filters.courseType) {
+      whereClause.courseType = filters.courseType;
+    }
+
+    const courses = await prisma.courses.findMany({
+      where: whereClause,
+      orderBy: {
+        created_at: 'desc',
+      },
+    });
+
+    return courses;
+  } catch (error) {
+    console.error('Error fetching courses:', error);
+    throw new Error('Failed to fetch courses');
+  }
+};
+
+
 const getCourseById = async (id) => {
   return await prisma.courses.findUnique({
     where: { id },
@@ -245,6 +275,7 @@ module.exports = {
   addInstructorsToCourse,
   addAdminToCourse,
   userExist,
+  getAllCourses,
   getUserCourses,
   getCourseById,
   createModule
