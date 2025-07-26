@@ -47,9 +47,11 @@ const generateToken = (res, body) => {
 
   res.cookie("token", token, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    // secure: process.env.NODE_ENV === "production",
+    secure: true,
     expires: expiresAt,
-    sameSite: "Lax",
+    // sameSite: "Lax",
+    sameSite: "none",
   });
   return token;
 };
