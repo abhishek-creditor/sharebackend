@@ -1,4 +1,5 @@
-const prisma = require('../../config/prismaClient')
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
 
 const createassignment = async (value)=>{
     let {title, description, max_score , time_limit, difficulty, instructions, created_by, updated_by, end_date, module_id , questions } = value;    

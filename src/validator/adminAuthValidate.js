@@ -12,4 +12,3 @@ exports.forgotPassword = {
         email : Joi.string().required()
     }),
 };
-

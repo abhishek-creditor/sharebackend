@@ -1,4 +1,4 @@
-const prisma = require('../../config/prismaClient')
+const prisma = require("../../config/prismaClient");
 
 const getAllAssignment = async(moduleid)=>{
   return await prisma.modules.findUnique({

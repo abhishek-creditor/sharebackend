@@ -1,4 +1,6 @@
-const prisma = require('../../config/prismaClient')
+const { PrismaClient } = require('@prisma/client');
+const { essay_submissions, essays } = require('../../config/prismaClient');
+const prisma = new PrismaClient();
 
 const insertEssayData = async(Essaydata)=>{
     return await prisma.essays.create({

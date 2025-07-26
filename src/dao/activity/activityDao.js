@@ -1,4 +1,5 @@
-const prisma = require('../../config/prismaClient')
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
 const activityDao = {
   logActivity: async ({ userId, action, targetId = null }) => {
     try {

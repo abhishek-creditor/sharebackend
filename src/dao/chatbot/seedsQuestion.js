@@ -1,6 +1,6 @@
 //This file is used to store the questions and their answer in the database and it is only executed once
 
-const prisma = require("../../config/prismaClient");
+const prisma = require("../../config/prismaClient.js");
 
 async function main() {
   const dummyQuestions = [
